@@ -1,0 +1,10 @@
+#!/bin/bash
+
+FILE=script.js
+TMP=/tmp/si.js
+
+js_update.php $FILE
+
+cat $FILE | sed -e 's/\(^\|};\)window./\1var /g' > $TMP
+
+mv $TMP $FILE
