@@ -16,13 +16,13 @@ function page(x)
 	return (''+document.location).indexOf(x) != -1 ? 1 : 0;
 }
 
-// functions/autoclick.js
-
-// functions/autoplant.js
-
-// functions/autowater.js
-
-// functions/version.js
-if(page('=garden'))(function(){var a={'5.0.1':'Автополив растений','5.0.0':'Новый суперскрипт для "Садовой империи"',};var b='?';for(b in a)break;var c=$('garten_aktuell_nummer').parentNode;c.innerHTML})();
+// functions/autoclick.js 
+function autoclick(a){var i,j,N=0,c={},f;var _=function(b){if(c[b])return;c[b]=1;parent.show_built(b,'over');f=''+$$(parent.garten.document,'#b'+b)[0].src;if(f.indexOf('cursors')!=-1&&f.indexOf('no.gif')==-1){parent.cache_me(b,parent.garten.garten_prod[b],parent.garten.garten_kategorie[b]);N++};parent.show_built(b,'out')};setTimeout(function(){for(j=0;j<12;j+=2)for(i=0;i<17;i+=2)_(j*17+i+1)},1);setTimeout(function(){for(j=0;j<12;j+=1)for(i=0;i<17;i+=2)_(j*17+i+1)},1500);setTimeout(function(){for(j=0;j<12;j+=1)for(i=0;i<17;i+=1)_(j*17+i+1);a(N)},3000)}
+// functions/autoplant.js 
+if(page('verkauf_map.php')){var f=showAutoPlant;showAutoPlant=function(){var g=parent.ajaxRequestCommon;parent.ajaxRequestCommon=function(a,b,c,h){h({});var l,m,o='',p=parent.regal.produkte;for(l in p){m=parent.regal.getProductInfos(l);if(m.category!='v')continue;o+='<option value="'+l+'">'+m.name+'</option>'};$$(parent.garten.document,'#ap_text')[0].innerHTML='Пока никто не видит, ты можешь еще <b>пару раз</b> попользоваться автоматом, только никому не говори!<br><br>Выбери продукт, который ты хочешь вырастить на свободных полях твоего сада.<br><span><select name="productid" id="productid">'+o+'</select>&nbsp;</span><br><span><button type="button" class="msg_input link" onclick="startAutoPlant();">Посадить</button></span>'};f();parent.ajaxRequestCommon=g}};if(page('garten_map.php'))startAutoPlant=function(){notify.wait('Идет посадка...');parent.regal.selectProduct(parent.garten.document.getElementById('productid').value);autoclick(function(N){if(N)notify.info('Посажено '+N+' растени'+ok(N,'е','я','ий'));else notify.error('Ничего не посажено!')})};
+// functions/autowater.js 
+if(page('verkauf_map.php'))$('helfer_all').appendChild($('span',{className:'link',title:'Гном-помощник по поливу',style:"position:absolute;z-index:1;width:25px;height:45px;top:0px;right:425px;background:URL('//pics.wurzelimperium.de/pics/verkauf/kannenzwerg.gif') top left no-repeat",onclick:function(){notify.wait('Идет полив...');parent.selectMode(2,true,parent.selected);autoclick(function(N){if(N)notify.info('Полито '+N+' растени'+ok(N,'е','я','ий'));else notify.error('Ничего не полито!')})}}));
+// functions/version.js 
+if(page('=garden'))(function(){var f={'5.0.2':'Автопосадка растений','5.0.1':'Автополив растений','5.0.0':'Новый суперскрипт для "Садовой империи"',};var g='?';for(g in f)break;var l=$('garten_aktuell_nummer').parentNode;l.innerHTML='<b>v'+g+'</b> '+l.innerHTML})();
 
 })();
