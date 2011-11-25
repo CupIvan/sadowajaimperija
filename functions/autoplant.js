@@ -1,6 +1,15 @@
 // привязываемся к штатному автомату-сажальщику
 if (page('verkauf_map.php'))
 {
+	// добавляем штатного сажальщика (на мелких уровнях)
+	if (!$('automat'))
+	{
+		$('helfer_all').appendChild($('div',
+			'<span id="automat" class="link" title="Автомат для посадки" style="right:333px;"'+
+				'onclick="showAutoPlant();"></span>'
+		));
+	}
+
 	// после нажатия на автомат активируем его, даже если не осталось попыток
 	var _showAutoPlant = showAutoPlant;
 	showAutoPlant = function()
@@ -41,4 +50,5 @@ startAutoPlant = function()
 		else
 			notify.error('Ничего не посажено!');
 	});
+	style('ap_div', 'display: none'); // принудительно скрываем форму посадки
 };
