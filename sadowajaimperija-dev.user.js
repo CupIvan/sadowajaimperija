@@ -16,5 +16,5 @@
 // ==/UserScript==
 
 var s = document.createElement('script');
-s.src = 'http://si.cupivan.su/i/script-dev.js';
+s.src = 'http://si.cupivan.su/beta/script-dev.js';
 document.body.appendChild(s);
