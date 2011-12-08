@@ -1,7 +1,12 @@
 #!/bin/bash
 
-FILE=script.js
-TMP=/tmp/si.js
+version=`cat install.html | grep '<b>' | head -n1 | awk '{ print $4 }'`
+echo "g.version = '$version';" > 'functions/version_auto.js'
+
+vMajor=${version%.*}
+
+FILE="script.$vMajor.js"
+TMP="/tmp/si.js"
 
 js_update.php $FILE
 

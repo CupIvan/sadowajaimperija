@@ -1,12 +1,12 @@
 <?php
 
-$st = file_get_contents('i/script.js');
+$st = file_get_contents('beta/script.js');
 
 $st = preg_replace_callback('#(// ([a-z/.]+).*?\n).*?\n#is', 'f', $st);
 function f($x)
 {
 	$st    = $x[1];
-	$fname = "i/".$x[2];
+	$fname = "beta/".$x[2];
 
 	if (file_exists($fname))
 		$st .= file_get_contents($fname);
@@ -15,5 +15,7 @@ function f($x)
 
 	return $st;
 }
+
+$st = str_replace('g = { ', 'g = { version: "NEW", ', $st);
 
 echo $st;

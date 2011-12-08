@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name           Molehill Empire
-// @namespace      sadowajaimperija
-// @description    Usefull script for game
+// @name           Molehill Empire Beta
+// @namespace      sadowajaimperija_beta
+// @description    Usefull script for game (v5)
 // @author         CupIvan <mail@cupivan.ru>
 // @version 5.0
 // @dateModify     18.11.11
@@ -19,5 +19,5 @@
 var SCRIPT_VERSION = '5.0';
 
 var s = document.createElement('script');
-s.src = 'http://si.cupivan.ru/i/script_'+SCRIPT_VERSION.replace(/^../, '')+'.js';
+s.src = 'http://si.cupivan.ru/beta/script_'+SCRIPT_VERSION.replace(/^../, '')+'.js';
 document.body.appendChild(s);

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+
+<body>
+<p id="i" style="background: green">Установка...</p>
+
+<h1>История версий</h1>
+
+<div class="simpleTable">
+
+
+08.12.11   | <b> 5.0.4 </b>   | Автообновление минорных версий
+25.11.11   | <b> 5.0.3 </b>   | Автопосадка заработала на уровнях ниже 8, автоскрытие окна выбора растений после посадки
+19.11.11   | <b> 5.0.2 </b>   | Автопосадка растений
+12.11.11   | <b> 5.0.1 </b>   | Автополив растений
+12.11.11   | <b> 5.0.0 </b>   | Новый суперскрипт для "Садовой империи"
+</div>
+
+<script>
+	// simpleTable.js 1.0
+window.$$=function(y,z,A){var H,I,J,K,L=document,M,D,N,O;if(typeof(y)!='string'){if(y)L=y;y=z;z=A};L=[L];y=y.split(' ');K=y.length;for(H=0;H<K;H++){M=[];for(I=0;I<L.length;I++){N=(/([#\.])?([\w-]+)([\.\[#])?([\w-]+)?/i).exec(y[H]);N[0]='';if('.checkbox.hidden.password.'.indexOf('.'+N[2]+'.')>=0)N[0]=N[2],N[2]='input';if(N[1]=='#')D=[L[I].getElementById(N[2])];else if(N[1]=='.')try{D=L[I].getElementsByClassName(N[2])}catch(D){D=_getElementsByClassName(L[I],N[2])}else try{D=L[I].getElementsByTagName(N[2])}catch(D){};O=D.length;for(J=0;J<O;J++)if(D[J]){if((N[3]=='.'&&D[J].className.indexOf(N[4])<0)||(N[3]=='#'&&D[J].id!=N[4])||(N[3]=='['&&D[J].name!=N[4]&&!D[J][N[4]])||(N[0]&&D[J].type!=N[0]))continue;M.push(D[J]);if(H==K-1&&z!=undefined)z(D[J],J,O)}};L=[].concat(M)};return L};window.$=function(B,C){var P,Q,y,R=B||document,H;if(typeof(B)=='function')return $('',{onDOMContentLoaded:B});if(typeof(B)=='object'&&B[0]&&B.nodeName!='SELECT'){H=-1;while(B[++H])R=$(B[H],C);return R};if(typeof(B)=='string'){if('.header.section.footer.div.span.nav.a.img.iframe.script.style.form.input.label.select.option.'.indexOf('.'+B+'.')!=-1){R=document.createElement(B);try{R.innerHTML=' '}catch(D){}}else if(B)R=document.getElementById(B);if(!R)return null}else if(B==undefined)R=document.body;if(C!=undefined){if(B=='style'){try{R.innerHTML=C}catch(D){R.setAttribute('type','text/css');R.styleSheet.cssText=C};return R};var S,z,T;if(typeof(C)!='object')C={innerHTML:C};for(H in C)if(H=='style')style(R,C[H]);else if(H.indexOf('on')==0){z=function(D){D=D||window.event;if(!D.target)D.target=D.srcElement;if(!D.which)D.which=D.keyCode;S=D.returnValue=C[H](D);if(!S&&D.preventDefault)D.preventDefault();return S};try{R.addEventListener(H.replace(/^on/,''),z,false)}catch(D){if(H.indexOf('onDOM')==0){T=window.onload;window.onload=function(){if(T)T();z()}}else R[H]=z}}else R[H]=C[H]};return R};function _getElementsByClassName(E,F){var U=[],H,V;var W=new RegExp('\\b'+F+'\\b');var G=E.getElementsByTagName('*');for(H=0;H<G.length;H++){V=G[H].className;if(W.test(V))U.push(G[H])};return U};$('nav');$('section');$('header');$('footer');window.simpleTable=function(D){D.innerHTML=D.innerHTML.replace(/(.+\|.+\n)+/,function(G){G=G.replace(/(.+)/g,'<tr><td>$1</td></tr>');G=G.replace(/\|/g,'</td><td>');G='<table>'+G+'</table>';return G})};$(function(){$$('.simpleTable',simpleTable)});
+
+	setTimeout(function()
+	{
+		document.getElementById('i').innerHTML = '';
+		document.location = 'sadowajaimperija.user.js';
+	}, 2000);
+</script>
+
+<!-- Yandex.Metrika counter -->
+<script src="//mc.yandex.ru/metrika/watch.js" type="text/javascript"></script>
+<div style="display:none;"><script type="text/javascript">
+try { var yaCounter1596919 = new Ya.Metrika({id:1596919, enableAll: true});}
+catch(e) { }
+</script></div>
+<noscript><div><img src="//mc.yandex.ru/watch/1596919" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+</body>
+</html>
