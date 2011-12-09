@@ -4,12 +4,20 @@ version=`cat install.html | grep '<b>' | head -n1 | awk '{ print $4 }'`
 echo "g.version = '$version';" > 'functions/version_auto.js'
 
 vMajor=${version%.*}
+date=`date +%d.%m.%y`
 
 FILE="script.$vMajor.js"
 TMP="/tmp/si.js"
+USERJS="sadowajaimperija.user.js"
 
 js_update.php $FILE
 
 cat $FILE | sed -e 's/\(^\|};\)window./\1var /g' > $TMP
-
 mv $TMP $FILE
+
+cat $USERJS |\
+	sed -e "s/\(@version\s\+\).\+/\1$vMajor/" |\
+	sed -e "s/\(@dateModify\s\+\).\+/\1$date/" |\
+	sed -e "s/\(VERSION =\).\+/\1 '$vMajor';/" |\
+	cat > $TMP
+mv $TMP $USERJS
