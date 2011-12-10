@@ -12,6 +12,7 @@ if (page('garten_map.php')) (function(){
 	{
 		var id = e.id.replace(/\D/g, '');
 		var color = '';
+		if (parent.garten.garten_kategorie[id] != 'v') return; // обрабатываем только посадки
 		if (parent.garten.garten_zeit[id] < jsTimeStamp)                 color = '#0F0'; // зеленый
 		if (parent.garten.garten_wasser[id]
 			&& parent.garten.garten_wasser[id] < jsTimeStamp - 24*60*60) color = '#00F'; // синий
