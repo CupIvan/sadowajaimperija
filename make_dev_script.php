@@ -1,6 +1,6 @@
 <?php
 
-$st = file_get_contents('beta/script.5.1.js');
+$st = file_get_contents('beta/script.5.2.js');
 //echo $st; exit;
 
 $st = preg_replace_callback('#(// ([a-z/.]+).*?\n).*?\n#is', 'f', $st);

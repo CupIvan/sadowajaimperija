@@ -1,6 +1,6 @@
 (function()
 {
-var L = ''+document.location, g = { updateMessage: '' };
+var L = ''+document.location, g = { server: '?', updateMessage: '' };
 
 // dollar.js 3.2
 var $$=function(a,b,_){var i,j,k,h,l=document,m,e,n,o;if(typeof(a)!='string'){if(a)l=a;a=b;b=_};l=[l];a=a.split(' ');h=a.length;for(i=0;i<h;i++){m=[];for(j=0;j<l.length;j++){n=(/([#\.])?([\w-]+)([\.\[#])?([\w-]+)?/i).exec(a[i]);n[0]='';if('.checkbox.hidden.password.'.indexOf('.'+n[2]+'.')>=0)n[0]=n[2],n[2]='input';if(n[1]=='#')e=[l[j].getElementById(n[2])];else if(n[1]=='.')try{e=l[j].getElementsByClassName(n[2])}catch(e){e=_getElementsByClassName(l[j],n[2])}else try{e=l[j].getElementsByTagName(n[2])}catch(e){};o=e.length;for(k=0;k<o;k++)if(e[k]){if((n[3]=='.'&&e[k].className.indexOf(n[4])<0)||(n[3]=='#'&&e[k].id!=n[4])||(n[3]=='['&&e[k].name!=n[4]&&!e[k][n[4]])||(n[0]&&e[k].type!=n[0]))continue;m.push(e[k]);if(i==h-1&&b!=undefined)b(e[k],k,o)}};l=[].concat(m)};return l};var $=function(c,d){var p,q,a,r=c||document,i;if(typeof(c)=='function')return $('',{onDOMContentLoaded:c});if(typeof(c)=='object'&&c[0]&&c.nodeName!='SELECT'){i=-1;while(c[++i])r=$(c[i],d);return r};if(typeof(c)=='string'){if('.header.section.footer.div.span.nav.a.img.iframe.script.style.form.input.label.select.option.'.indexOf('.'+c+'.')!=-1){r=document.createElement(c);try{r.innerHTML=' '}catch(e){}}else if(c)r=document.getElementById(c);if(!r)return null}else if(c==undefined)r=document.body;if(d!=undefined){if(c=='style'){try{r.innerHTML=d}catch(e){r.setAttribute('type','text/css');r.styleSheet.cssText=d};return r};var s,b,t;if(typeof(d)!='object')d={innerHTML:d};for(i in d)if(i=='style')style(r,d[i]);else if(i.indexOf('on')==0){b=function(e){e=e||window.event;if(!e.target)e.target=e.srcElement;if(!e.which)e.which=e.keyCode;s=e.returnValue=d[i](e);if(!s&&e.preventDefault)e.preventDefault();return s};try{r.addEventListener(i.replace(/^on/,''),b,false)}catch(e){if(i.indexOf('onDOM')==0){t=window.onload;window.onload=function(){if(t)t();b()}}else r[i]=b}}else r[i]=d[i]};return r};function _getElementsByClassName(f,g){var u=[],i,v;var w=new RegExp('\\b'+g+'\\b');var x=f.getElementsByTagName('*');for(i=0;i<x.length;i++){v=x[i].className;if(w.test(v))u.push(x[i])};return u};$('nav');$('section');$('header');$('footer');
@@ -11,13 +11,20 @@ var notify=(function(){this.id=0;this.ids={};this.wait=function(x,t,d){return th
 // ok.js 1.0
 var ok=function(n,a,b,c){var f=c,d=n%10;if(d<5)f=b;if(d<2)f=a;if(!d||(n>4&&n<21))f=c;return f}
 
-function page(x)
+// проверка на какой мы странице
+var page = function(x)
 {
 	return (''+document.location).indexOf(x) != -1 ? 1 : 0;
 }
+// определяем какой у нас сервер
+var s = /(\d+).+\.(.+)/.exec(''+document.domain);
+if (L.indexOf('.bg.')) s[2] = 'bg';
+g.server = s[2] + s[1];
 
+// functions/storage.js 
+var storage={obj:storage=window['localStorage'],save:function(a,b){this.obj.setItem(g.server+a,b)},load:function(a,b){this.obj.getItem(g.server+a)}}
 // functions/version.js 
-g.version='5.1.1';if(page('=garden'))(function(){var a=$('garten_aktuell_nummer').parentNode;a.innerHTML='<b>v'+g.version+'</b> '+a.innerHTML})();if(page('=garden'))(function(){if(g.updateMessage){notify.wait('Новые вкусности приехали!\n<br>Тебя ждет что-то интересненькое:<br><a target="_top" href="http://si.cupivan.ru/beta/install.html?fromVersion='+g.version+'">'+g.updateMessage+', а также...</a>');return}})();
+g.version='5.2.0';if(page('=garden'))(function(){var a=$('garten_aktuell_nummer').parentNode;a.innerHTML='<b>v'+g.version+'</b> '+a.innerHTML})();if(page('=garden'))(function(){if(g.updateMessage){notify.wait('Новые вкусности приехали!\n<br>Тебя ждет что-то интересненькое:<br><a target="_top" href="http://si.cupivan.ru/beta/install.html?fromVersion='+g.version+'">'+g.updateMessage+', а также...</a>');return}})();
 // functions/autoclick.js 
 function autoclick(a){var i,j,N=0,c={},f;var _=function(b){if(c[b])return;c[b]=1;parent.show_built(b,'over');f=''+$$(parent.garten.document,'#b'+b)[0].src;if(f.indexOf('cursors')!=-1&&f.indexOf('no.gif')==-1){parent.cache_me(b,parent.garten.garten_prod[b],parent.garten.garten_kategorie[b]);N++};parent.show_built(b,'out')};setTimeout(function(){for(j=0;j<12;j+=2)for(i=0;i<17;i+=2)_(j*17+i+1)},1);setTimeout(function(){for(j=0;j<12;j+=1)for(i=0;i<17;i+=2)_(j*17+i+1)},1500);setTimeout(function(){for(j=0;j<12;j+=1)for(i=0;i<17;i+=1)_(j*17+i+1);a(N)},3000)}
 // functions/autoplant.js 
@@ -26,5 +33,7 @@ if(page('verkauf_map.php')){if(!$('automat')){$('helfer_all').appendChild($('div
 if(page('verkauf_map.php'))$('helfer_all').appendChild($('span',{className:'link',title:'Гном-помощник по поливу',style:"position:absolute;z-index:1;width:25px;height:45px;top:0px;right:425px;background:URL('//pics.wurzelimperium.de/pics/verkauf/kannenzwerg.gif') top left no-repeat",onclick:function(){notify.wait('Идет полив...');parent.selectMode(2,true,parent.selected);autoclick(function(N){if(N)notify.info('Полито '+N+' растени'+ok(N,'е','я','ий'));else notify.error('Ничего не полито!')})}}));
 // functions/paintPlant.js 
 if(page('garten_map.php'))(function(){var f=parent.Zeit.Client-parent.Zeit.Verschiebung;$$('.cursor',function(e){var g=e.id.replace(/\D/g,'');var l='';if(parent.garten.garten_kategorie[g]!='v')return;if(parent.garten.garten_zeit[g]<f)l='#0F0';if(parent.garten.garten_wasser[g]&&parent.garten.garten_wasser[g]<f-24*60*60)l='#00F';if(!parent.garten.garten_prod[g]||parent.garten.garten_prod[g]==41)l='#000';if(l)style(e,'opacity: 0.3; background: '+l)})})();
+// functions/saveMarketPrice.js 
+if(page('markt.php'))(function(){var f=/&v=(\d+)/.exec(L);if(!f)return;f=f[1];var g=$$($$('tr')[1],'td');if(!g[3])return;var l=g[3].innerHTML.replace(/\D+$/,'').replace(/[. ]/,'').replace(',','.');storage.save('/price/'+f,l)})();
 
 })();

