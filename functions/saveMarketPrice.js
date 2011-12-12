@@ -9,6 +9,6 @@ if (page('markt.php')) (function(){
 	var td = $$($$('tr')[1], 'td'); if (!td[3]) return;
 	var price = td[3].innerHTML.replace(/\D+$/, '').replace(/[. ]/, '').replace(',', '.');
 
-	storage.save('/price/'+productId, price);
+	storage.set('/price/'+productId, price);
 
 })();

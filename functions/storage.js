@@ -3,13 +3,21 @@
  */
 window.storage =
 {
-	obj: storage = window['localStorage'],
-	save: function(key, value)
+	set: function(key, value, session)
 	{
-		this.obj.setItem(g.server + key, value);
+		if (session)
+			window['sessionStorage'].setItem(g.server + key, json(value));
+		else
+			window['localStorage'].setItem(g.server + key, json(value));
 	},
-	load: function(key, value)
+	get: function(key, def)
 	{
-		this.obj.getItem(g.server + key);
+		return this.decode(window['localStorage'].getItem(g.server + key))
+			|| this.decode(window['sessionStorage'].getItem(g.server + key))
+			|| def;
+	},
+	decode: function(x)
+	{
+		return eval('('+x+')');
 	}
 }
