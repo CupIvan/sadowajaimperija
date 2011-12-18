@@ -9,7 +9,7 @@ if (page('markt.php')) (function(){
 	storage.set('/session/market/time/'+productId, time());
 
 	var td = $$($$('tr')[1], 'td'); if (!td[3]) return;
-	var price = td[3].innerHTML.replace(/\D+$/, '').replace(/[. ]/, '').replace(',', '.');
+	var price = parseFloat(td[3].innerHTML.replace(/\D+$/, '').replace(/[. ]/, '').replace(',', '.'));
 
 	storage.set('/market/price/'+productId, price);
 
