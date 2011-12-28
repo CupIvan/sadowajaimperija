@@ -3,7 +3,9 @@
 // текущая версия скрипта в трее
 if (page('=garden')) (function(){
 	var tray = $('garten_aktuell_nummer').parentNode;
-	tray.innerHTML = '<b>v' + g.version + '</b> ' + tray.innerHTML;
+	tray.innerHTML = '<a href="http:/'+'/si.cupivan.ru/beta/changelog.html" target="_blank"'+
+		' style="font-weight: bold; color: yellow;" title="История изменений">'+
+		'v' + g.version + '</a> ' + tray.innerHTML;
 })();
 
 // показываем сообщение об обновлении

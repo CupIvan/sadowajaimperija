@@ -3,8 +3,8 @@
 // @namespace      sadowajaimperija_beta
 // @description    Usefull script for game (v5)
 // @author         CupIvan <mail@cupivan.ru>
-// @version 5.2
-// @dateModify     18.12.11
+// @version        5.2
+// @dateModify     29.12.11
 // @include        http://*.sadowajaimperija.ru/*
 // @include        http://*.bg.molehillempire.com/*
 // @include        http://*.molehillempire.com/*
