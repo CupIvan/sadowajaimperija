@@ -31,7 +31,7 @@ var round = function(x, d)
 	x = Math.round(x * d);
 	return x / d + (x%100==0?'.0':'') + (x%10==0?'0':'');
 }
-var id   = kundenId;
+var id   = $$('input[kunde]')[0].value;
 var list = $$('.blau');
 var div  = list[list.length - 1];
 var sum  = parseInt(div.innerHTML.replace(/\D/g, '')) / 100;

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-version=`cat install.html | grep '<b>' | head -n1 | awk '{ print $4 }'`
+version=`cat install.html | grep -E '> [0-9\.]+ ' | head -n1 | awk '{ print $4 }'`
 echo "g.version = '$version';" > 'functions/version_auto.js'
 
 vMajor=${version%.*}

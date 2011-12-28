@@ -1,1 +1,1 @@
-g.version = '5.2.5';
+g.version = '5.2.6';
