@@ -12,11 +12,14 @@ if (page('garten_map.php')) (function(){
 	{
 		var id = e.id.replace(/\D/g, '');
 		var color = '';
-		if (parent.garten.garten_kategorie[id] != 'v') return; // обрабатываем только посадки
+
+		if (parent.garten.garten_kategorie[id] == 'z') return; // декор
+		if (parent.garten.garten_kategorie[id] == 'u') return; // еще чего-то
 		if (parent.garten.garten_zeit[id] < jsTimeStamp)                 color = '#0F0'; // зеленый
+		else
 		if (parent.garten.garten_wasser[id]
 			&& parent.garten.garten_wasser[id] < jsTimeStamp - 24*60*60) color = '#00F'; // синий
-		if (!parent.garten.garten_prod[id]/*пустая клетка*/
+		if (  !parent.garten.garten_prod[id]/*пустая клетка*/
 			|| parent.garten.garten_prod[id] == 41/*сорняки*/) color = '#000'; // черный
 
 		if (color)

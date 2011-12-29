@@ -12,7 +12,7 @@ USERJS="sadowajaimperija.user.js"
 
 js_update.php $FILE
 
-cat $FILE | sed -e 's/\(^\|};\)window./\1var /g' > $TMP
+cat $FILE | sed -e 's/\(^\|};\)window\./\1var /g' > $TMP
 mv $TMP $FILE
 
 cat $USERJS |\

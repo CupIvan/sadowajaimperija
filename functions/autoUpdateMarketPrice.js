@@ -7,9 +7,9 @@ var createMarket = function()
 {
 	$().appendChild($('iframe', {id: 'hidden_market'}));
 }
-var openMarketPage = function(id)
+var openMarketPage = function(productId)
 {
-	$('hidden_market').src = '/stadt/markt.php?filter=1&page=1&order=p&v='+id;
+	$('hidden_market').src = '/stadt/markt.php?filter=1&page=1&order=p&v='+productId;
 }
 var rand = function(min, max)
 {
