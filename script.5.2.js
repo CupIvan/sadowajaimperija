@@ -28,7 +28,7 @@ g.server = s[2] + s[1];
 // functions/storage.js 
 var storage={set:function(b,c){if(b.indexOf('/session/')!=-1)window['sessionStorage'].setItem(g.server+b,json(c));else window['localStorage'].setItem(g.server+b,json(c))},get:function(b,f){if(b.indexOf('/session/')!=-1)return this.decode(window['sessionStorage'].getItem(g.server+b))||f;else return this.decode(window['localStorage'].getItem(g.server+b))||f},decode:function(x){return eval('('+x+')')}}
 // functions/version.js 
-g.version='5.2.6';if(page('=garden'))(function(){var b=$('garten_aktuell_nummer').parentNode;b.innerHTML='<a href="http://si.cupivan.ru/beta/changelog.html" target="_blank" style="font-weight: bold; color: yellow;" title="История изменений">v'+g.version+'</a> '+b.innerHTML})();if(page('=garden'))(function(){if(g.updateMessage){notify.wait('Новые вкусности приехали!\n<br>Тебя ждет что-то интересненькое:<br><a target="_top" href="http://si.cupivan.ru/beta/install.html?fromVersion='+g.version+'">'+g.updateMessage+', а также...</a>');return}})();
+g.version='5.2.7';if(page('=garden'))(function(){var b=$('garten_aktuell_nummer').parentNode;b.innerHTML='<a href="http://si.cupivan.ru/beta/changelog.html" target="_blank" style="font-weight: bold; color: yellow;" title="История изменений">v'+g.version+'</a> '+b.innerHTML})();if(page('=garden'))(function(){if(g.updateMessage){notify.wait('Новые вкусности приехали!\n<br>Тебя ждет что-то интересненькое:<br><a target="_top" href="http://si.cupivan.ru/beta/install.html?fromVersion='+g.version+'">'+g.updateMessage+', а также...</a>');return}})();
 // functions/autoclick.js 
 function autoclick(b){var i,j,N=0,f={},g;var _=function(c){if(f[c])return;f[c]=1;parent.show_built(c,'over');g=''+$$(parent.garten.document,'#b'+c)[0].src;if(g.indexOf('cursors')!=-1&&g.indexOf('no.gif')==-1){parent.cache_me(c,parent.garten.garten_prod[c],parent.garten.garten_kategorie[c]);N++};parent.show_built(c,'out')};setTimeout(function(){for(j=0;j<12;j+=2)for(i=0;i<17;i+=2)_(j*17+i+1)},1);setTimeout(function(){for(j=0;j<12;j+=1)for(i=0;i<17;i+=2)_(j*17+i+1)},1500);setTimeout(function(){for(j=0;j<12;j+=1)for(i=0;i<17;i+=1)_(j*17+i+1);b(N)},3000)}
 // functions/autoplant.js 
@@ -44,6 +44,7 @@ if(page('verkauf_map.php'))(function(){var i=0,j,f,g,l,o;while(parent.kunden['i'
 // functions/autoUpdateMarketPrice.js 
 if(page('=garden'))(function(){var p=function(){$().appendChild($('iframe',{f:'hidden_market'}))};var q=function(f){$('hidden_market').src='/stadt/markt.php?filter=1&page=1&order=p&v='+f};var u=function(g,l){var r=Math.random();return Math.round(r *(l-g))+g};p();var v=0,o,z=time();for(o=1;o<data_products.length;o++)if(data_products[o].category=='v')if(z-storage.get('/session/market/time/'+o,0)>10*60)(function(o){setTimeout(function(){q(o)},v+=u(5,9)* 1000)})(o)})();
 // functions/shop.js 
-if(page('shop.php'))(function(){var i,f,g;for(i=0;i<items.length;i++){g=items[i].price;f=items[i].productid;storage.set('/shop/price/'+f,g);storage.set('/shop/link/'+f,snr)}})();
-
+if(page('shop.php'))(function(){var i,g,l;for(i=0;i<items.length;i++){l=items[i].price;g=items[i].productid;storage.set('/shop/price/'+g,l);storage.set('/shop/link/'+g,snr)}})();
+// functions/markCurrentField.js 
+if(page('garten_map.php')){var i,N=/garden=(\d+)/.exec(L);N=N?N[1]:1;for(i=1;i<=6;i++)style($$(parent.document,'#garten_quick'+i)[0],(i==N?'margin: 2px 0 -2px 1px; border: 2px solid red;':'margin: 4px 0  0   3px; border: 0;')+' padding: 0;')}
 })();
