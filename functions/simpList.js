@@ -3,6 +3,7 @@
  */
 
 // сохранение списка на странице с симпиками
+//-------------------------------------------
 if (page('verkauf_map.php')) (function(){
 
 var i = 0, j, id, counts, products, obj;
@@ -22,7 +23,9 @@ while (parent.kunden['i'+i])
 
 })();
 
+
 // модификация списка
+//--------------------
 if (page('verkauf.php')) (function(){
 
 var round = function(x, d)
@@ -39,6 +42,7 @@ var sum  = parseInt(div.innerHTML.replace(/\D/g, '')) / 100;
 var productId, market_price, min_price, is_shop, st = '', sum_sell = 0, sum_buy = 0, num, cl_color, st_right, st_shop = '';
 var list  = storage.get('/session/simp/'+id);
 
+// перебираем все растения и вычисляем сумму покупки
 st_right = ' style="text-align: right"';
 for (productId in list)
 {
@@ -64,6 +68,9 @@ for (productId in list)
 	cl_color  = 'class="' + (num>0?'blau':'rot') + '"';
 	min_price = round(min_price, 2);
 
+	if (num < 0)
+		storage.set('/session/buyNow/'+productId, -num);
+
 	st += '<tr>'+
 		'<td><div class="e' + productId + '" style="display: inline-block;"></div></td>'+
 		'<td '+cl_color+st_right+'>' + num   + ' x</td>'+
@@ -72,6 +79,9 @@ for (productId in list)
 		'<td '+cl_color+st_right+'>' + round(list[productId] * min_price, 2) + '</td>'+
 		'</tr>';
 }
+
+style($$(top.document, '#stadt')[0], 'position: relative; left: 40px; top: 40px; z-index: 6;');
+style($$(top.document, '#stadtframe')[0], 'width: 640px; height: 560px;');
 
 st = '<table style="margin: auto">'+st+'</table>';
 
@@ -89,5 +99,33 @@ st = '<hr style="width: 80%">' + st_total + '<hr style="width: 80%">' + st;
 var div = $$('div');
 style(div[1], 'margin-top: -30px');
 div[1].innerHTML = st;
+
+// обработчик клика по строке
+$($$(div[1], 'tr'), {onclick: function(e){
+	var productId = e.target.parentNode.innerHTML.replace(/.+?(\d+).+/, '$1');
+	top.$('stadt').style.display = 'block';
+	top.$('stadtframe').src = '/stadt/markt.php?filter=1&page=1&order=p&v='+productId;
+}});
+
+})();
+
+
+// корректировки на странице рынка
+//---------------------------------
+if (page('markt.php')) (function(){
+
+// исправляем кнопку "закрыть" на рынке, а то так не работает
+$$('.closeBtn')[0].onclick = function() {
+	style(parent.$('stadt'), 'display: none');
+	parent.kunde.location.reload(); // обновляем список покупок, чтобы появилась кнопка "Да"
+};
+
+// подставляем нужное кол-во растений
+var productId = /v=(\d+)/.exec(L)[1];
+var buy_ = buy;
+buy = function(a,b,c,d,e)
+{
+	buy_(a, storage.get('/session/buyNow/'+productId, b),c,d,e);
+}
 
 })();
