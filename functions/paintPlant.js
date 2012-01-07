@@ -14,7 +14,7 @@ if (page('garten_map.php')) (function(){
 		var color = '';
 
 		if (parent.garten.garten_kategorie[id] == 'z') return; // декор
-		if (parent.garten.garten_kategorie[id] == 'u') return; // еще чего-то
+		if (parent.garten.garten_kategorie[id] == 'u') return; // еще чего-то, v -> овощ
 		if (parent.garten.garten_zeit[id] < jsTimeStamp)                 color = '#0F0'; // зеленый
 		else
 		if (parent.garten.garten_wasser[id]

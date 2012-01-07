@@ -44,7 +44,7 @@ function autoclick(handler)
 		// если что-то обработали - запускаем еще разок, чтобы ничего не пропустить
 		setTimeout(function(){
 			if (res) return f();
-			if (N) parent.garten.location = parent.garten.location; // обновляем фрейм
+			if (N) parent.garten.location = (''+parent.garten.location).replace(/ernte=\w+/, ''); // обновляем фрейм
 			handler(N);
 		}, 1000);
 	}; f();
