@@ -1,5 +1,3 @@
-// functions/version_auto.js
-
 // текущая версия скрипта в трее
 if (page('=garden')) (function(){
 	var tray = $('garten_aktuell_nummer').parentNode;

@@ -30,8 +30,10 @@ g.server = s ? s[2] + s[1] : '';
 
 // functions/storage.js 
 var storage={server:g.server,set:function(b,c){if(b.indexOf('/session/')!=-1)window['sessionStorage'].setItem(this.server+b,json(c));else window['localStorage'].setItem(this.server+b,json(c))},get:function(b,f){if(b.indexOf('/session/')!=-1)return this.decode(window['sessionStorage'].getItem(this.server+b))||f;else return this.decode(window['localStorage'].getItem(this.server+b))||f},decode:function(x){try{return eval('('+x+')')}catch(e){return 0}}}
+// functions/version_auto.js 
+g.version='5.2.12';
 // functions/version.js 
-g.version='5.2.11';if(page('=garden'))(function(){var b=$('garten_aktuell_nummer').parentNode;b.innerHTML='<a href="http://si.cupivan.ru/beta/changelog.html" target="_blank" style="font-weight: bold; color: yellow;" title="История изменений">v'+g.version+'</a> '+b.innerHTML})();if(page('=garden'))(function(){if(g.updateMessage){notify.wait('Новые вкусности приехали!\n<br>Тебя ждет что-то интересненькое:<br><a target="_top" href="http://si.cupivan.ru/beta/install.html?fromVersion='+g.version+'">'+g.updateMessage+', а также...</a>');return}})();
+if(page('=garden'))(function(){var b=$('garten_aktuell_nummer').parentNode;b.innerHTML='<a href="http://si.cupivan.ru/beta/changelog.html" target="_blank" style="font-weight: bold; color: yellow;" title="История изменений">v'+g.version+'</a> '+b.innerHTML})();if(page('=garden'))(function(){if(g.updateMessage){notify.wait('Новые вкусности приехали!\n<br>Тебя ждет что-то интересненькое:<br><a target="_top" href="http://si.cupivan.ru/beta/install.html?fromVersion='+g.version+'">'+g.updateMessage+', а также...</a>');return}})();
 // functions/autoclick.js 
 function autoclick(b){var i,j,N=0,g={},h;var _=function(c){var l=0;if(g[c])return l;g[c]=1;parent.show_built(c,'over');h=''+$$(parent.garten.document,'#b'+c)[0].src;if(h.indexOf('cursors')!=-1&&h.indexOf('no.gif')==-1){parent.cache_me(c,parent.garten.garten_prod[c],parent.garten.garten_kategorie[c]);l=1;N++};parent.show_built(c,'out');return l};var f=function(){var l=0;for(j=0;j<12;j+=2)for(i=0;i<17;i+=2)l+=_(j*17+i+1);for(j=0;j<12;j+=1)for(i=0;i<17;i+=2)l+=_(j*17+i+1);for(j=0;j<12;j+=1)for(i=0;i<17;i+=1)l+=_(j*17+i+1);setTimeout(function(){if(l)return f();if(N)parent.garten.location=(''+parent.garten.location).replace(/ernte=\w+/,'');b(N)},1000)};f()}
 // functions/autoplant.js 
@@ -52,4 +54,6 @@ if(page('shop.php'))(function(){var i,g,l;for(i=0;i<items.length;i++){l=items[i]
 if(page('garten_map.php')){var i,N=/garden=(\d+)/.exec(L);N=N?N[1]:1;for(i=1;i<=6;i++)style($$(parent.document,'#garten_quick'+i)[0],(i==N?'margin: 2px 0 -2px 1px; border: 2px solid red;':'margin: 4px 0  0   3px; border: 0;')+' padding: 0;')}
 // functions/gardenButtons.js 
 if(page('main.php'))(function(){if($('asd').innerHTML.indexOf('garten_quick')!=-1)return;player_auto=1;var i,g='';for(i=1;i<=_REGALZAHL;i++)g+='<img id="garten_quick'+i+'"style="padding-left:3px; padding-top:4px;"src="'+_GFX+'pics/garten/garten'+i+'.jpg" onclick="waehleGarten('+i+');">';g+='<img id="garten_quick_stadt" style="padding-left:3px; padding-top:10px;"src="'+_GFX+'pics/garten/garten_stadt.jpg" onclick="zeigeStadtMain(1);">';g+='<img id="garten_quick_stadt2" style="padding-left:3px; padding-top:10px;"src="'+_GFX+'pics/garten/garten_stadt.jpg" onclick="zeigeStadtMain(2);">';var l=$('div',{innerHTML:g,style:'position:absolute; left:0px; top:250px;'});$('asd').appendChild(l)})();
+// functions/other.js 
+style('barkerOpener','display: none');
 })();
