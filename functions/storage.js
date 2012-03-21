@@ -20,6 +20,8 @@ window.storage =
 	},
 	decode: function(x)
 	{
-		return eval('('+x+')');
+		try {
+			return eval('('+x+')');
+		} catch (e) { return 0; }
 	}
 }

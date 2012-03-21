@@ -1,5 +1,7 @@
 <?php
 
+header('Content-type: application/javascript');
+
 $st = file_get_contents('beta/script.5.2.js');
 //echo $st; exit;
 
