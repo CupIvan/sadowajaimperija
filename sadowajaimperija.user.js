@@ -4,7 +4,7 @@
 // @description    Usefull script for game (v5)
 // @author         CupIvan <mail@cupivan.ru>
 // @version        5.2
-// @dateModify     21.03.12
+// @dateModify     29.03.12
 // @include        http://*.sadowajaimperija.ru/*
 // @include        http://*.bg.molehillempire.com/*
 // @include        http://*.molehillempire.com/*

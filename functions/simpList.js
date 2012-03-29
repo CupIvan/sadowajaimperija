@@ -29,6 +29,9 @@ function drawSimpList(list)
 {
 	var st = '';
 
+	// сохраняем идентификатор симпа (для обновления после прихода из рынка)
+	storage.set('/session/lastSimpId', list.id);
+
 	var round = function(x, d)
 	{
 		d = Math.pow(10, d);
@@ -113,16 +116,20 @@ if (page('markt.php')) (function(){
 
 // исправляем кнопку "закрыть" на рынке, а то так не работает
 $$('.closeBtn')[0].onclick = function() {
+	parent.wimps.show(storage.get('/session/lastSimpId')); // обновляем список покупок, чтобы появилась кнопка "Да"
 	style(parent.$('stadt'), 'display: none');
-	parent.kunde.location.reload(); // обновляем список покупок, чтобы появилась кнопка "Да"
 };
 
 // подставляем нужное кол-во растений
-var productId = /v=(\d+)/.exec(L)[1];
-var buy_ = buy;
-buy = function(a,b,c,d,e)
+try
 {
-	buy_(a, storage.get('/session/buyNow/'+productId, b),c,d,e);
+	var productId = /v=(\d+)/.exec(L)[1];
+	var buy_ = buy;
+	buy = function(a,b,c,d,e)
+	{
+		buy_(a, storage.get('/session/buyNow/'+productId, b),c,d,e);
+	}
 }
+catch(e){}
 
 })();
